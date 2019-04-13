@@ -10,10 +10,10 @@ public class LinkedListFunction extends LinkedList {
             node1 = node1.next;
             node2 = node2.next;
         }
-        if (node1 != null || node2 != null) {
-            return null; // если списки разной длины
+        if (node1 == null && node2 == null) {
+            return sum_list;
         }
-        return sum_list;
+        return null;
     }
 }
 
