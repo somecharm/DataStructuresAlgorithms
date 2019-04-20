@@ -15,9 +15,9 @@ public class DynArray<T> {
     public void makeArray(int new_capacity) {
         if (array == null) {
             array = (T[]) java.lang.reflect.Array.newInstance(this.clazz, new_capacity);
-        } else if (new_capacity > capacity) {
+        } else  {
             T[] newArray = (T[]) java.lang.reflect.Array.newInstance(this.clazz, new_capacity);
-            System.arraycopy(array, 0, newArray, 0, array.length);
+            System.arraycopy(array, 0, newArray, 0, count);
             array = newArray;
         }
         capacity = new_capacity;
@@ -69,9 +69,12 @@ public class DynArray<T> {
         array[count - 1] = null;
         count--;
 
-        if (count < capacity / 2 && capacity > 16 * 1.5) {
-            capacity = (int) (capacity / 1.5);
-            makeArray(capacity);
+        if (count < (int) (capacity * 0.5) && capacity > 16) {
+            if ((int) (capacity / 1.5) < 16) {
+                makeArray(16);
+            } else{
+                makeArray((int) (capacity / 1.5));
+            }
         }
     }
 }
