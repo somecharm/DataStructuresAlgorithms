@@ -23,7 +23,7 @@ public class Stack<T> {
     }
 
     public void push(T val) {
-        stack.addLast(val);
+        stack.addFirst(val);
     }
 
     public T peek() {
