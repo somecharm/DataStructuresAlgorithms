@@ -20,7 +20,7 @@ public class Deque<T> {
 
     public T removeFront() {
         // удаление из головы
-        if (deque.getFirst() != null) {
+        if (deque.size() > 0) {
             return deque.removeFirst();
         }
         return null;
@@ -28,7 +28,7 @@ public class Deque<T> {
 
     public T removeTail() {
         // удаление из хвоста
-        if (deque.getLast() != null) {
+        if (deque.size() > 0) {
             return deque.removeLast();
         }
         return null;

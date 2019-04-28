@@ -44,6 +44,13 @@ class DequeTest {
     }
 
     @Test
+    void removeFrontEmpty() {
+        Deque<Integer> deq = new Deque<>();
+        assertNull(deq.removeFront());
+        assertEquals(0, deq.size());
+    }
+
+    @Test
     void removeTail() {
         Deque<Integer> deq = new Deque<>();
         deq.addFront(new Integer(0));
@@ -54,6 +61,13 @@ class DequeTest {
         assertEquals(1, deq.deque.get(1));
         deq.removeTail();
         assertEquals(2, deq.deque.get(0));
+    }
+
+    @Test
+    void removeTailEmpty() {
+        Deque<Integer> deq = new Deque<>();
+        assertNull(deq.removeTail());
+        assertEquals(0, deq.size());
     }
 
     @Test
