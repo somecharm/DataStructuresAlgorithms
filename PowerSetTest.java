@@ -21,6 +21,8 @@ class PowerSetTest {
         ps.put("sdg");
         ps.put("sd");
         ps.put("sd");
+        ps.put("sdf");
+        ps.put("sdg");
         assertEquals(3, ps.size());
     }
 

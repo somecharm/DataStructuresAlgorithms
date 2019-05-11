@@ -21,13 +21,14 @@ public class PowerSet {
 
     public void put(String value) {
         // всегда срабатывает
+        if (get(value)){
+            return;
+        }
         int slot = hashFun(value);
         for (int i = 0; i < size; i++) {
             if (slots[slot] == null) {
                 slots[slot] = value;
                 count++;
-                return;
-            } else if (slots[slot].equals(value)) {
                 return;
             }
             slot = slot + step;
