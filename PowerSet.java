@@ -94,7 +94,12 @@ public class PowerSet {
 
     public PowerSet union(PowerSet set2) {
         // объединение текущего множества и set2
-        PowerSet set = this;
+        PowerSet set = new PowerSet();
+        for (int i = 0; i < size; i++) {
+            if (slots[i] != null) {
+                set.put(slots[i]);
+            }
+        }
         for (int i = 0; i < set2.size; i++) {
             if (set2.slots[i] != null) {
                 set.put(set2.slots[i]);

@@ -109,11 +109,14 @@ class PowerSetTest {
         ps.put("sdv");
         ps.put("sdfsf");
         ps.put("sd");
+        ps.put("hg");
         PowerSet ps2 = new PowerSet();
         ps2.put("aaa");
         ps2.put("sdv1");
         ps2.put("hg");
-        assertEquals(7, ps.union(ps2).size());
+        for (String s : ps.union(ps2).slots) {
+            System.out.println(s);
+        }
     }
 
     @Test
@@ -139,6 +142,9 @@ class PowerSetTest {
         ps2.put("sdv1");
         ps2.put("sd");
         assertEquals(3, ps.difference(ps2).size());
+        /*for (String s : ps.difference(ps2).slots) {
+            System.out.println(s);
+        }*/
     }
 
     @Test
