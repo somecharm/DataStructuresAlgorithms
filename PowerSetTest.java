@@ -48,14 +48,28 @@ class PowerSetTest {
     @Test
     void remove() {
         PowerSet ps = new PowerSet();
-//        ps.put("sdf");
-        ps.put("sdv");
-//        ps.put("sdfsf");
+        ps.put("sdf");
+        ps.put("sdg");
         ps.put("sd");
-        ps.remove("sdv");
+        ps.put("sd2");
+        ps.put("sdf2");
+        ps.put("s");
+        ps.put("ss");
+        ps.put("sss");
+        ps.put("ssss");
+
+        ps.remove("s");
         ps.remove("sd");
-        assertEquals(0, ps.size());
+        assertEquals(7, ps.size());
         assertFalse(ps.remove("aaa"));
+        assertTrue(ps.get("sdg"));
+        assertTrue(ps.get("sdf2"));
+        assertTrue(ps.get("ss"));
+        assertTrue(ps.get("sdf"));
+        assertTrue(ps.get("ssss"));
+        assertTrue(ps.get("sss"));
+        assertTrue(ps.get("sd2"));
+
     }
 
     @Test

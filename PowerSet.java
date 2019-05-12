@@ -23,7 +23,8 @@ public class PowerSet {
         int slot;
         if (get(value)) {
             return;
-        } if (size() == size) {
+        }
+        if (size() == size) {
             String[] temp = slots;
             size = size * 2;
             count = 0;
@@ -48,9 +49,8 @@ public class PowerSet {
         int slot = hashFun(value);
 
         for (int i = 0; i < size; i++) {
-            if (slots[slot] == null) {
-                return false;
-            } else if (slots[slot].equals(value)) {
+
+            if (slots[slot] != null && slots[slot].equals(value)) {
                 return true;
             }
             slot = slot + step;
@@ -64,19 +64,18 @@ public class PowerSet {
     public boolean remove(String value) {
         // возвращает true если value удалено
         // иначе false
-        int slot = hashFun(value);
-
-        for (int i = 0; i < size; i++) {
-            if (slots[slot] == null) {
-                return false;
-            } else if (slots[slot].equals(value)) {
-                slots[slot] = null;
-                count--;
-                return true;
-            }
-            slot = slot + step;
-            if (slot >= size) {
-                slot = slot - size;
+        if (get(value)) {
+            int slot = hashFun(value);
+            for (int i = 0; i < size; i++) {
+                if (slots[slot].equals(value)) {
+                    slots[slot] = null;
+                    count--;
+                    return true;
+                }
+                slot = slot + step;
+                if (slot >= size) {
+                    slot = slot - size;
+                }
             }
         }
         return false;
