@@ -67,7 +67,7 @@ public class PowerSet {
         if (get(value)) {
             int slot = hashFun(value);
             for (int i = 0; i < size; i++) {
-                if (slots[slot].equals(value)) {
+                if (slots[slot] != null && slots[slot].equals(value)) {
                     slots[slot] = null;
                     count--;
                     return true;

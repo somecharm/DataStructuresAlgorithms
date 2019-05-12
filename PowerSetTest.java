@@ -69,7 +69,7 @@ class PowerSetTest {
         assertTrue(ps.get("ssss"));
         assertTrue(ps.get("sss"));
         assertTrue(ps.get("sd2"));
-
+        assertTrue(ps.remove("sss"));
     }
 
     @Test
