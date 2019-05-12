@@ -6,7 +6,7 @@ public class PowerSet {
 
     public PowerSet() {
         // ваша реализация хранилища
-        size = 17;
+        size = 5;
         step = 3;
         count = 0;
         slots = new String[size];
@@ -18,23 +18,27 @@ public class PowerSet {
         return count;
     }
 
-
     public void put(String value) {
         // всегда срабатывает
-        if (get(value)){
+        int slot;
+        if (get(value)) {
             return;
-        }
-        int slot = hashFun(value);
-        for (int i = 0; i < size; i++) {
-            if (slots[slot] == null) {
-                slots[slot] = value;
+        } if (size() == size) {
+            String[] temp = slots;
+            size = size * 2;
+            count = 0;
+            slots = new String[size];
+            for (String s : temp) {
+                slot = seekSlot(s);
+                slots[slot] = s;
                 count++;
-                return;
             }
-            slot = slot + step;
-            if (slot >= size) {
-                slot = slot - size;
-            }
+            temp = null;
+        }
+        slot = seekSlot(value);
+        if (slot > -1) {
+            slots[slot] = value;
+            count++;
         }
     }
 
@@ -127,4 +131,21 @@ public class PowerSet {
         // всегда возвращает корректный индекс слота
         return value.getBytes().length % size;
     }
+
+    public int seekSlot(String value) {
+        // находит индекс пустого слота для значения, или -1
+        int slot = hashFun(value);
+        for (int i = 0; i < size; i++) {
+            if (slots[slot] == null) {
+                return slot;
+            }
+            slot = slot + step;
+            if (slot >= size) {
+                slot = slot - size;
+            }
+        }
+        return -1;
+    }
+
 }
+

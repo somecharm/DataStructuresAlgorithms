@@ -22,8 +22,11 @@ class PowerSetTest {
         ps.put("sd");
         ps.put("sd");
         ps.put("sdf");
-        ps.put("sdg");
-        assertEquals(3, ps.size());
+        ps.put("s");
+        ps.put("ss");
+        ps.put("sss");
+        ps.put("ssss");
+        assertEquals(7, ps.size());
     }
 
     @Test
@@ -33,6 +36,11 @@ class PowerSetTest {
         ps.put("sdg");
         ps.put("sd");
         ps.put("sd");
+        ps.put("sdf");
+        ps.put("s");
+        ps.put("ss");
+        ps.put("sss");
+        ps.put("ssss");
         assertTrue(ps.get("sd"));
         assertFalse(ps.get("sdq"));
     }
@@ -40,12 +48,13 @@ class PowerSetTest {
     @Test
     void remove() {
         PowerSet ps = new PowerSet();
-        ps.put("sdf");
+//        ps.put("sdf");
         ps.put("sdv");
-        ps.put("sdfsf");
+//        ps.put("sdfsf");
         ps.put("sd");
         ps.remove("sdv");
-        assertEquals(3, ps.size());
+        ps.remove("sd");
+        assertEquals(0, ps.size());
         assertFalse(ps.remove("aaa"));
     }
 
