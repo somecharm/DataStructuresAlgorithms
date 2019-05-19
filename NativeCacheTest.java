@@ -41,7 +41,8 @@ class NativeCacheTest {
         nc.get("zzz");
         nc.put("yyy",888);
         nc.get("yyy");
-        nc.put("qqq",999);
+//        nc.put("qqq",999);
+        nc.put("yyy",3000);
         System.out.println("------------");
         for (Object i : nc.values) {
             System.out.println(i);

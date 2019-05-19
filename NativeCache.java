@@ -33,6 +33,7 @@ public class NativeCache<T> {
         int slot = hashFun(key);
         for (int i = 0; i < size; i++) {
             if (slots[slot] == null || slots[slot].equals(key)) {
+                hits[slot]=0;
                 slots[slot] = key;
                 values[slot] = value;
                 return;
