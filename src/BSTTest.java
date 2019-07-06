@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BSTTest {
@@ -245,4 +247,49 @@ class BSTTest {
         assertEquals(12, bst.Root.NodeKey);
         assertEquals(4, bst.FindNodeByKey(12).Node.LeftChild.NodeKey);
     }
+
+    @Test
+    void wideAllNodes() {
+        BST<Integer> bst = new BST<>(null);
+        assertTrue(bst.AddKeyValue(8, 8));
+        assertTrue(bst.AddKeyValue(4, 4));
+        assertTrue(bst.AddKeyValue(12, 12));
+        assertTrue(bst.AddKeyValue(2, 2));
+        assertTrue(bst.AddKeyValue(6, 6));
+        assertTrue(bst.AddKeyValue(1, 1));
+        assertTrue(bst.AddKeyValue(3, 3));
+        assertTrue(bst.AddKeyValue(5, 5));
+        assertTrue(bst.AddKeyValue(7, 7));
+        assertTrue(bst.AddKeyValue(10, 10));
+        assertTrue(bst.AddKeyValue(14, 14));
+        assertTrue(bst.AddKeyValue(9, 9));
+        assertTrue(bst.AddKeyValue(11, 11));
+        assertTrue(bst.AddKeyValue(13, 13));
+        assertTrue(bst.AddKeyValue(15, 15));
+
+        ArrayList<BSTNode<Integer>> list = bst.WideAllNodes();
+        for (BSTNode<Integer> i : list) {
+            System.out.println(i.NodeKey);
+        }
+    }
+
+    @Test
+    void deepAllNodes() {
+        BST<Integer> bst = new BST<>(null);
+        assertTrue(bst.AddKeyValue(8, 8));
+        assertTrue(bst.AddKeyValue(4, 4));
+        assertTrue(bst.AddKeyValue(12, 12));
+        assertTrue(bst.AddKeyValue(2, 2));
+        assertTrue(bst.AddKeyValue(6, 6));
+        assertTrue(bst.AddKeyValue(1, 1));
+        assertTrue(bst.AddKeyValue(3, 3));
+        assertTrue(bst.AddKeyValue(5, 5));
+        assertTrue(bst.AddKeyValue(7, 7));
+
+        ArrayList<BSTNode<Integer>> list = bst.DeepAllNodes(2);
+        for (BSTNode<Integer> i : list) {
+            System.out.println(i.NodeKey);
+        }
+    }
+
 }

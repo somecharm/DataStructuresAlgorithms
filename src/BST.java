@@ -164,4 +164,58 @@ class BST<T> {
         return count; // количество узлов в дереве
     }
 
+    public ArrayList<BSTNode<T>> WideAllNodes() {
+        ArrayList<BSTNode<T>> list = new ArrayList<>();
+        Queue<BSTNode<T>> queue = new ArrayDeque<>();
+        BSTNode<T> node = Root;
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            list.add(node);
+            if (node.LeftChild != null) {
+                queue.add(node.LeftChild);
+            }
+            if (node.RightChild != null) {
+                queue.add(node.RightChild);
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<BSTNode<T>> DeepAllNodes(int order) {
+        ArrayList<BSTNode<T>> list = new ArrayList<>();
+        if (order == 0) {
+            in_order(Root, list);
+        } else if (order == 1) {
+            post_order(Root, list);
+        } else if (order == 2) {
+            pre_order(Root, list);
+        }
+        return list;
+    }
+
+    public void in_order(BSTNode<T> node, ArrayList<BSTNode<T>> list) {
+        if (node != null) {
+            in_order(node.LeftChild, list);
+            list.add(node);
+            in_order(node.RightChild, list);
+        }
+    }
+
+    public void post_order(BSTNode<T> node, ArrayList<BSTNode<T>> list) {
+        if (node != null) {
+            post_order(node.LeftChild, list);
+            post_order(node.RightChild, list);
+            list.add(node);
+        }
+    }
+
+    public void pre_order(BSTNode<T> node, ArrayList<BSTNode<T>> list) {
+        if (node != null) {
+            list.add(node);
+            pre_order(node.LeftChild, list);
+            pre_order(node.RightChild, list);
+        }
+    }
+
 }
