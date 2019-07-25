@@ -52,7 +52,7 @@ class BalancedBSTTest {
     @Test
     void isBalanced() {
         BalancedBST balancedBST = new BalancedBST();
-        int[] a = {2, 5, 7, 4, 3, 1, 6, 8};
+        int[] a = {2, 7, 4, 3, 1};
         balancedBST.CreateFromArray(a);
         System.out.println(Arrays.toString(balancedBST.BSTArray));
         balancedBST.GenerateTree();

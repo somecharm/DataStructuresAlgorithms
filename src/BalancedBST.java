@@ -76,25 +76,20 @@ class BalancedBST {
     public boolean IsBalanced(BSTNode root_node) {
         if (root_node == null)
             return true;
-        if (root_node.LeftChild == null & root_node.RightChild == null) {
-            return true;
-        }
-        int leftHeight = root_node.Level;
-        if (root_node.LeftChild != null) {
-            leftHeight = root_node.LeftChild.Level;
-        }
-        int rightHeight = root_node.Level;
-        if (root_node.RightChild != null) {
-            rightHeight = root_node.RightChild.Level;
-        }
-
-        if (Math.abs(leftHeight - rightHeight) > 1) {
-            return false;
-        }
+        int left = MaxDepth(root_node.LeftChild);
+        int right = MaxDepth(root_node.RightChild);
         // сбалансировано ли дерево с корнем root_node
-        else {
-            return IsBalanced(root_node.LeftChild) && IsBalanced(root_node.RightChild);
-        }
+        return Math.abs(left - right) <= 1;
+    }
 
+    int MaxDepth(BSTNode node) {
+        if (node != null) {
+            int left = node.Level;
+            int right = node.Level;
+            if (node.LeftChild != null) left = MaxDepth(node.LeftChild);
+            if (node.RightChild != null) right = MaxDepth(node.RightChild);
+            return Math.max(left, right);
+        }
+        return 0;
     }
 }  
