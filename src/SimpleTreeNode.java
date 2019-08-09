@@ -133,4 +133,39 @@ class SimpleTree<T> {
         }
         return levels;
     }
+
+    public ArrayList<Integer> EvenTrees() {
+        ArrayList<Integer> list = new ArrayList<>();
+        if (Count() % 2 == 1) {
+            return list;
+        }
+        Queue<SimpleTreeNode<T>> queue = new ArrayDeque<>();
+        SimpleTreeNode<T> node = Root;
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            if ((node != Root) && (CountNodes(node) % 2 == 0)) {
+                list.add((Integer) node.Parent.NodeValue);
+                list.add((Integer) node.NodeValue);
+            }
+            if (!node.Children.isEmpty()) {
+                queue.addAll(node.Children);
+            }
+        }
+        return list;
+    }
+
+    private int CountNodes(SimpleTreeNode<T> node) {
+        int count = 1;
+        Queue<SimpleTreeNode<T>> queue = new ArrayDeque<>();
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            if (!node.Children.isEmpty()) {
+                queue.addAll(node.Children);
+                count += node.Children.size();
+            }
+        }
+        return count;
+    }
 }
