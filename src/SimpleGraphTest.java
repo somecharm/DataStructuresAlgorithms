@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -207,5 +208,29 @@ class SimpleGraphTest {
         assertEquals(1, graph.m_adjacency[3][0]);
 
         System.out.println(Arrays.deepToString(graph.m_adjacency));
+    }
+
+    @Test
+    void depthFirstSearch() {
+        SimpleGraph graph = new SimpleGraph(5);
+        graph.AddVertex(10);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+
+
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(0, 3);
+        graph.AddEdge(1, 3);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(1, 4);
+        graph.AddEdge(3, 4);
+
+        ArrayList<Vertex> path = graph.DepthFirstSearch(0, 4);
+        for (Vertex v : path) {
+            System.out.println(v.Value);
+        }
     }
 }

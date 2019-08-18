@@ -2,13 +2,15 @@ import java.util.*;
 
 class Vertex {
     public int Value;
+    public boolean Hit;
 
     public Vertex(int val) {
         Value = val;
+        Hit = false;
     }
 }
 
-class SimpleGraph {
+class SimpleGraph<T> {
     Vertex[] vertex;
     int[][] m_adjacency;
     int max_vertex;
@@ -18,6 +20,45 @@ class SimpleGraph {
         m_adjacency = new int[size][size];
         vertex = new Vertex[size];
     }
+
+    public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
+        // Узлы задаются позициями в списке vertex.
+        // Возвращается список узлов -- путь из VFrom в VTo.
+        // Список пустой, если пути нет.
+
+        Stack<Vertex> stack = new Stack<>();
+
+        for (Vertex v : vertex) {
+            v.Hit = false;
+        }
+        vertex[VFrom].Hit = true;
+        stack.push(vertex[VFrom]);
+
+        while (!stack.empty()) {
+            int x = Arrays.asList(vertex).indexOf(stack.peek());
+            if (IsEdge(x, VTo)) {
+                stack.push(vertex[VTo]);
+                break;
+            }
+            int j = 0;
+            while (j < max_vertex) {
+                if (IsEdge(x, j) && !vertex[j].Hit) {
+                    vertex[j].Hit = true;
+                    stack.push(vertex[j]);
+                    break;
+                }
+                j++;
+            }
+            if (j == max_vertex) {
+                stack.pop();
+                if (stack.empty()) {
+                    System.out.println("Путь не найден");
+                }
+            }
+        }
+        return new ArrayList<Vertex>(stack);
+    }
+
 
     public void AddVertex(int value) {
         // ваш код добавления новой вершины
