@@ -59,6 +59,54 @@ class SimpleGraph<T> {
         return new ArrayList<Vertex>(stack);
     }
 
+    public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
+        // Узлы задаются позициями в списке vertex.
+        // Возвращается список узлов -- путь из VFrom в VTo.
+        // Список пустой, если пути нет.
+        Queue<Vertex> queue = new LinkedList<>();
+        ArrayList<Vertex> path = new ArrayList<>();
+        int[] parent = new int[max_vertex];
+
+        for (Vertex v : vertex) {
+            v.Hit = false;
+        }
+        vertex[VFrom].Hit = true;
+        queue.add(vertex[VFrom]);
+
+        while (!queue.isEmpty()) {
+            int x = Arrays.asList(vertex).indexOf(queue.poll());
+            int j = 0;
+            while (j < max_vertex) {
+
+                if (IsEdge(x, j) && !vertex[j].Hit) {
+                    vertex[j].Hit = true;
+                    parent[j] = x;
+                    System.out.println("parent " + j + " = " + parent[j]);
+                    if (j == VTo) {
+                        break;
+                    }
+                    queue.add(vertex[j]);
+                }
+                j++;
+                if (j == max_vertex) {
+                    if (queue.isEmpty()) {
+                        break;
+                    }
+                }
+            }
+        }
+        int i = VTo;
+        while (i != VFrom) {
+            path.add(vertex[i]);
+            i = parent[i];
+        }
+        path.add(vertex[VFrom]);
+        Collections.reverse(path);
+        if (path.size()==1){
+            path.clear();
+        }
+        return path;
+    }
 
     public void AddVertex(int value) {
         // ваш код добавления новой вершины
