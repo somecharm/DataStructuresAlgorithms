@@ -21,6 +21,40 @@ class SimpleGraph<T> {
         vertex = new Vertex[size];
     }
 
+    public ArrayList<Vertex> WeakVertices() {
+        // возвращает список узлов вне треугольников
+        ArrayList<Vertex> list = new ArrayList<>();
+        for (Vertex v : vertex) {
+            v.Hit = false;
+        }
+
+        for (int v = 0; v < max_vertex; v++) {
+            if (vertex[v].Hit) {
+                continue;
+            }
+            for (int i = 0; i < max_vertex; i++) {
+                if (IsEdge(v, i)) {
+                    for (int j = 0; j < max_vertex; j++) {
+                        if (IsEdge(v, j) && IsEdge(i, j)) {
+                            vertex[v].Hit = true;
+                            vertex[i].Hit = true;
+                            vertex[j].Hit = true;
+                            break;
+                        }
+                    }
+                    if (vertex[v].Hit) {
+                        break;
+                    }
+                }
+            }
+            if (!vertex[v].Hit) {
+                list.add(vertex[v]);
+            }
+        }
+        return list;
+    }
+
+
     public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
         // Узлы задаются позициями в списке vertex.
         // Возвращается список узлов -- путь из VFrom в VTo.
@@ -102,7 +136,7 @@ class SimpleGraph<T> {
         }
         path.add(vertex[VFrom]);
         Collections.reverse(path);
-        if (path.size()==1){
+        if (path.size() == 1) {
             path.clear();
         }
         return path;
